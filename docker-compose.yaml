@@ -32,6 +32,10 @@ services:
       timeout: 3s
       retries: 10
 
+  gateway-service:
+    build: ./gateway-service
+    ports:
+      - "9999:9999"
 
   ebank-service:
     build: ./ebank-service
