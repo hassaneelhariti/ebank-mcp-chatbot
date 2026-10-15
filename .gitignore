@@ -1,0 +1,23 @@
+# Build
+target/
+build/
+*.class
+*.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Secrets
+.env
+*.pem
+application-local.properties
+
+# Angular / Node
+node_modules/
+dist/
+.angular/
+
+# OS
+.DS_Store
