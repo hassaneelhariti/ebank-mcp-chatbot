@@ -18,10 +18,9 @@ public class AccountRestController {
     }
 
     @GetMapping("/accounts/{id}")
-    public Account getAccountById(@PathVariable @RequestParam Long id){
+    public Account getAccountById(@PathVariable("id") Long id) {
         return accountService.getAccountById(id);
     }
-
     @PostMapping("/accounts")
     public Account saveAccount(@RequestBody Account account){
         return accountService.saveAccount(account);

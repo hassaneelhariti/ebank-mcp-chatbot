@@ -1,4 +1,4 @@
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:21-jre-alpine
 LABEL authors="hassaneelhariti"
 WORKDIR "/app"
 COPY target/ebank-service-0.0.1-SNAPSHOT.jar /app/
