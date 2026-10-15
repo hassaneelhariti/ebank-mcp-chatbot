@@ -1,4 +1,9 @@
 services:
+  discovery-service:
+    build: ./discovery-service
+    ports:
+      - "8761:8761"
+
   ebank-db:
     image: postgres:16
     environment:
@@ -27,6 +32,10 @@ services:
       timeout: 3s
       retries: 10
 
+  gateway-service:
+    build: ./gateway-service
+    ports:
+      - "9999:9999"
 
   ebank-service:
     build: ./ebank-service
@@ -39,6 +48,8 @@ services:
     depends_on:
       ebank-db:
         condition: service_healthy
+      discovery-service:
+        condition: service_healthy
 
   customer-service:
     build: ./customer-service
@@ -50,6 +61,8 @@ services:
       DB_PASSWORD: postgres
     depends_on:
       customer-db:
+        condition: service_healthy
+      discovery-service:
         condition: service_healthy
 
 volumes:
