@@ -14,3 +14,8 @@ spring:
               uri: lb://EBANK-SERVICE
               predicates:
                 - Path=/accounts/**
+
+            - id: ebank-bot
+              uri: lb://EBANK-BOT
+              predicates:
+                - Path=/chat,/chat/**
