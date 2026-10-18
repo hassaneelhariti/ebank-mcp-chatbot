@@ -10,9 +10,21 @@ import org.springframework.stereotype.Service;
 public class EbankAiAgent {
 
     private final ChatClient chatClient;
+    private static final String SYSTEM_PROMPT = """
+    Vous êtes un assistant qui répond aux questions de l'utilisateur à propos
+    des clients et des comptes bancaires.
+    Règles :
+    - Pour obtenir une donnée (nombre de clients, détail d'un client, comptes...),
+    utilisez toujours les outils disponibles. Ne devinez jamais.
+    - Pour un simple comptage, utilisez l'outil de comptage plutôt que de lister tous les clients.
+   - Ne créez un client que si l'utilisateur le demande explicitement.
+   Ne fournissez jamais d'identifiant : il est généré automatiquement.
+   - Si les outils ne renvoient aucune information utile, répondez : JE NE SAIS PAS.
+   - Si un outil renvoie une erreur, expliquez-le simplement à l'utilisateur. """;
 
     public EbankAiAgent(ChatClient.Builder chatClient, ChatMemory chatMemory, ToolCallbackProvider toolCallbackProvider) {
         this.chatClient = chatClient
+                .defaultSystem(SYSTEM_PROMPT)
                 .defaultAdvisors(MessageChatMemoryAdvisor.builder(chatMemory).build())
                 .defaultTools(toolCallbackProvider)
                 .build();
