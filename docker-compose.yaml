@@ -69,6 +69,7 @@ services:
     environment:
       API_KEY: ${API_KEY}
       CUSTOMER_SERVICE_URL: http://customer-service:8082
+      EBANK_SERVICE_URL: http://ebank-service:8081
       EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://discovery-service:8761/eureka/
     depends_on:
       discovery-service:
